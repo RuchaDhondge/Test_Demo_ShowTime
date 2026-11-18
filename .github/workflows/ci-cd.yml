@@ -132,8 +132,17 @@ jobs:
 
       - name: Verify the shared application
         run: |
-          curl --fail --retry 12 --retry-delay 5 \
-            http://127.0.0.1:8080/healthz
+          for attempt in {1..30}; do
+            if curl --fail --silent --show-error \
+              http://127.0.0.1:8080/healthz; then
+              break
+            fi
+            if [ "$attempt" -eq 30 ]; then
+              echo "Shared application did not become ready" >&2
+              exit 1
+            fi
+            sleep 2
+          done
           curl --fail \
             'http://127.0.0.1:8080/api/events?city=Pune'
           curl --fail \
