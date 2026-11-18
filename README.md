@@ -6,6 +6,10 @@ See [docs/local-network-hosting.md](docs/local-network-hosting.md) for setup, LA
 
 Team members can follow [docs/colleague-testing.md](docs/colleague-testing.md) to verify each deployed version.
 
+Developers should follow [docs/team-development.md](docs/team-development.md)
+for frontend-only work, isolated backend dependencies, Flyway changes, and use
+of the shared demo database.
+
 ## GitHub Actions image delivery
 
 Pushes to `main` test the frontend and backend, build both Docker images, and publish commit-SHA tags plus `latest` tags to GHCR:

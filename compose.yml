@@ -2,7 +2,7 @@ services:
   postgres:
     image: postgres:17-alpine
     ports:
-      - "${POSTGRES_LAN_BIND_IP:-172.30.3.102}:${POSTGRES_LAN_PORT:-5432}:5432"
+      - "${POSTGRES_LAN_BIND_IP:-127.0.0.1}:${POSTGRES_LAN_PORT:-5432}:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-booking}
       POSTGRES_USER: ${POSTGRES_USER:-booking}
