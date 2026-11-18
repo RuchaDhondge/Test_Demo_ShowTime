@@ -14,7 +14,12 @@ import org.springframework.data.repository.query.Param;
 
 public interface ShowSeatRepository extends JpaRepository<ShowSeat, Long> {
 
-	List<ShowSeat> findByEventIdOrderBySeatLabel(Long eventId);
+	@Query("""
+			select seat from ShowSeat seat
+			where seat.event.id = :eventId
+			order by seat.seatLabel
+			""")
+	List<ShowSeat> findByEventIdOrderBySeatLabel(@Param("eventId") Long eventId);
 
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	@Query("""
