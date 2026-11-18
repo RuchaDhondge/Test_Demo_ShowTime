@@ -123,9 +123,9 @@ jobs:
           GHCR_BACKEND_IMAGE: ${{ needs.publish.outputs.backend-image }}
           GHCR_WEB_IMAGE: ${{ needs.publish.outputs.web-image }}
         run: |
-          docker compose --project-name demobooking \
+          /Users/rucha.dhondge/.docker/bin/docker-compose -p demobooking \
             -f compose.yml -f compose.ghcr.yml pull backend web
-          docker compose --project-name demobooking \
+          /Users/rucha.dhondge/.docker/bin/docker-compose -p demobooking \
             -f compose.yml -f compose.ghcr.yml up -d --no-build backend web
 
       - name: Verify the shared application
