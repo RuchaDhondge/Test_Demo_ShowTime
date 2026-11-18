@@ -98,6 +98,9 @@ jobs:
     needs: publish
     runs-on: [self-hosted, demo-showtime]
     environment: demo-showtime
+    concurrency:
+      group: demo-showtime-deployment
+      cancel-in-progress: false
 
     steps:
       - name: Check out deployment files
@@ -115,5 +118,16 @@ jobs:
           GHCR_BACKEND_IMAGE: ${{ needs.publish.outputs.backend-image }}
           GHCR_WEB_IMAGE: ${{ needs.publish.outputs.web-image }}
         run: |
-          docker compose -f compose.yml -f compose.ghcr.yml pull backend web
-          docker compose -f compose.yml -f compose.ghcr.yml up -d --no-build backend web
+          docker compose --project-name demobooking \
+            -f compose.yml -f compose.ghcr.yml pull backend web
+          docker compose --project-name demobooking \
+            -f compose.yml -f compose.ghcr.yml up -d --no-build backend web
+
+      - name: Verify the shared application
+        run: |
+          curl --fail --retry 12 --retry-delay 5 \
+            http://127.0.0.1:8080/healthz
+          curl --fail \
+            'http://127.0.0.1:8080/api/events?city=Pune'
+          curl --fail \
+            'http://127.0.0.1:8080/api/events/1/seats'

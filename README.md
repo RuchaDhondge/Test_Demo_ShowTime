@@ -4,6 +4,8 @@ Minimal Spring Boot and React demonstration for testing a ticket-booking flow ov
 
 See [docs/local-network-hosting.md](docs/local-network-hosting.md) for setup, LAN access, API examples, operations, and scale-up guidance.
 
+Team members can follow [docs/colleague-testing.md](docs/colleague-testing.md) to verify each deployed version.
+
 ## GitHub Actions image delivery
 
 Pushes to `main` test the frontend and backend, build both Docker images, and publish commit-SHA tags plus `latest` tags to GHCR:
