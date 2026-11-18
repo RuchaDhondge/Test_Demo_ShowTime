@@ -1,0 +1,8 @@
+services:
+  backend:
+    image: ${GHCR_BACKEND_IMAGE:?Set GHCR_BACKEND_IMAGE to the commit-SHA backend image}
+    pull_policy: always
+
+  web:
+    image: ${GHCR_WEB_IMAGE:?Set GHCR_WEB_IMAGE to the commit-SHA web image}
+    pull_policy: always
