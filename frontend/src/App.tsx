@@ -113,7 +113,7 @@ function App() {
     <main>
       <header>
         <p className="eyebrow">Local network demonstration</p>
-        <h1>Ticket Booking</h1>
+        <h1>Ticket Booking Modified By New User</h1>
         <p>PostgreSQL-authoritative seat holds with Redis acceleration.</p>
       </header>
 
